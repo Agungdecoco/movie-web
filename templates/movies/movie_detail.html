@@ -1,0 +1,31 @@
+{% extends 'movies/base.html' %} 
+{% block title %}{{ movie.name }}{% endblock %} 
+{% block content %}
+<a href="/" class="btn btn-primary">Back to list</a>
+<div class="movie-title mb-4 mt-2">
+  <h1>{{ movie.name }}</h1>
+  <strong>MPAA Rating:</strong> {{ movie.mpaa_rating_type }} - {{ movie.mpaa_rating_label }}
+</div>
+<div class="row">
+  <div class="col-6"><img src="{{ movie.img_path }}" class="card-img-top" alt="{{ movie.name }}" /></div>
+  <div class="col-6">
+    <div class="details mb-4">
+      <h3>Details</h3>
+      <p class="card-text">
+        <strong>Duration:</strong> {{ movie.duration }} mins
+      </p>
+      <p class="card-text"><strong>Language:</strong> {{ movie.language }}</p>
+      <p class="card-text"><strong>Genre:</strong> {{ movie.genre|join:", " }}</p>
+      <p class="card-text">
+        <strong>User Rating:</strong> {{ movie.user_rating }}/5
+      </p>
+    </div>
+    <div class="synopsis mb-4">
+      <h3>Synopsis</h3>
+      <p class="card-text">
+        <strong>Description:</strong> {{ movie.description }}
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

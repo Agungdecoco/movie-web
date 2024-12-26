@@ -1,0 +1,49 @@
+{% extends 'movies/base.html' %} 
+{% block title %}Movie Listings{% endblock %} 
+{% block content %}
+<h1 class="mb-4">Movie Listings</h1>
+<div class="mb-3">
+  <input
+    type="text"
+    id="search"
+    class="form-control"
+    placeholder="Search movies..."
+    onkeyup="filterMovies()"
+  />
+</div>
+<div id="movieList" class="row">
+  {% for movie in movies %}
+  <div class="col-md-4 mb-4 movie-item">
+    <div class="card">
+      <img
+        src="{{ movie.img_path }}"
+        class="card-img-top"
+        alt="{{ movie.name }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          <a href="{{ movie.id }}/">{{ movie.name }}</a>
+        </h5>
+        <p class="card-text">
+          {{ movie.language }} | {{ movie.duration }} mins
+        </p>
+        <p class="card-text">User Rating: {{ movie.user_rating }}/5</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<script>
+  function filterMovies() {
+    const input = document.getElementById("search").value.toLowerCase();
+    const movies = document.querySelectorAll(".movie-item");
+
+    movies.forEach((movie) => {
+      const title = movie
+        .querySelector(".card-title a")
+        .textContent.toLowerCase();
+      movie.style.display = title.includes(input) ? "" : "none";
+    });
+  }
+</script>
+{% endblock %}
